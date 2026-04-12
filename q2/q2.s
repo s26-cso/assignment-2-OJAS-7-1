@@ -7,8 +7,28 @@ stack: .space 400     # space for 100 integers
 .text
 la s0,stack          # s0 = base address of stack
 
-initialise_result:
+main:
+    jal ra,initialise_result
+    jal ra,next_greater
+    ret
 
+initialise_result: # initialise result array
+    addi t0,x0,0        # i = 0
+
+init_loop:
+    beq t0,a1,init_done # if i == length → stop
+
+    slli t1,t0,2        # offset = i*4
+    add t1,a2,t1        # address = a2 + offset
+
+    addi t2,x0,-1
+    sw t2,0(t1)          # result[i] = -1
+
+    addi t0,t0,1        # i++
+    jal x0,init_loop
+
+init_done:
+    ret
 
 next_greater:
     addi t0,x0,-4 # top = -4
