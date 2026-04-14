@@ -139,6 +139,6 @@ push_next:
     addi t2,t2,-1 # next iteration
     jal x0,loop
 
-pop:k
+pop:
     addi t0,t0,-4 # top--
     jal x0,loop
