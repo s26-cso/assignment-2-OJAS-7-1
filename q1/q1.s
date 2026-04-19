@@ -1,4 +1,4 @@
-.globl make_node:
+.globl make_node
 # a0 = pointer to the root ; # a1 = val
 # return value in a0
 make_node:
@@ -24,7 +24,7 @@ make_node:
     addi sp,sp,16
     ret 
       
-.globl insert:
+.globl insert
 
 insert:
     addi sp,sp,-16
@@ -66,7 +66,7 @@ end_null:
     addi sp,sp,16
     ret
 
-.globl get:
+.globl get
 
 get:
     addi t0,a1,0 # t0 = val
@@ -98,7 +98,7 @@ not_found:
     add a0,x0,0 # return NULL
     ret
 
-.globl getAtMost:
+.globl getAtMost
 getAtMost:
     add t0,x0,x0 # t0 = NULL (stores best predecessor)
 
@@ -106,14 +106,14 @@ fxn:
     beq a0,x0,return_pred   # if root == NULL → return best found
     ld t1,0(a0) # t1 = root->val
     beq a1,t1,found # exact match → return this node
-    blt a1,t1,go_left   # if val < root->val → go left
+    blt a1,t1,go_left2  # if val < root->val → go left
 
-go_right:
+go_right2:
     add t0,x0,a0 # update predecessor
     ld a0,16(a0) # move to right
     jal x0,fxn
 
-go_left:
+go_left2:
     ld a0,8(a0) # move to left
     jal x0,fxn
 
