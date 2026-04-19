@@ -41,17 +41,17 @@ insert:
 
 compare:
     ld t2,0(s0) # t2 = root->val    
-    blt t0,t2,go_left
-    bge t0,t2,go_right
+    blt t0,t2,insert_go_left
+    bge t0,t2,insert_go_right
 
-go_left:
+insert_go_left:
     ld a0,8(s0) # a0 = root->left
     add a1,x0,t0
     jal ra,insert
     sd a0,8(s0)
     jal x0,end
 
-go_right:
+insert_go_right:
     ld a0,16(s0) # a0 = root->right
     add a1,x0,t0
     jal ra,insert
@@ -77,15 +77,15 @@ get:
     ld t2,0(t1) # t2 = root->val 
     beq t0,t2,done  
 
-    blt t0,t2,left
-    bge t0,t2,right
+    blt t0,t2,get_left
+    bge t0,t2,get_right
 
-left:
+get_left:
     ld a0,8(t1) # a0 = root->left
     add a1,x0,t0
     jal x0,get
 
-right:
+get_right:
     ld a0,16(t1) # a0 = root->right
     add a1,x0,t0
     jal x0,get
