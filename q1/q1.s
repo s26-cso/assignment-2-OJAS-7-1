@@ -95,7 +95,7 @@ done:
     ret
 
 not_found:
-    add a0,x0,0 # return NULL
+    add a0,x0,zero # return NULL
     ret
 
 .globl getAtMost
